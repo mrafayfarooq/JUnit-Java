@@ -1,4 +1,5 @@
-import domain.Employee;
+package domain;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -6,15 +7,14 @@ import org.junit.rules.ExpectedException;
 import utils.BadParameterException;
 import utils.NullParameterException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * Created by Muhammad Rafay on 5/31/17.
  */
 public class EmployeeTest {
     private Employee e;
+    private SalesEmployee s;
 
     @Before
     public void setUp() {

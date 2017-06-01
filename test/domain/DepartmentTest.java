@@ -1,6 +1,5 @@
-import domain.Department;
-import domain.Employee;
-import domain.SalesEmployee;
+package domain;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -8,8 +7,7 @@ import org.junit.rules.ExpectedException;
 import utils.BadParameterException;
 import utils.NullParameterException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 
 /**
@@ -18,7 +16,6 @@ import static org.junit.Assert.fail;
 public class DepartmentTest {
     private Department d;
     private Employee e;
-    private SalesEmployee s;
     @Before
     public void setUp() {
         try {
@@ -30,25 +27,37 @@ public class DepartmentTest {
             fail("Creation of test Department or Employee object in @Before 'setUp' failed: " + e.getMessage());
         }
     }
+
     @Test
-    public void testDepartmentName() {
+    public void testSetDepartmentName() throws NullParameterException, BadParameterException {
+        try {
+            d = new Department("");
+        } catch (BadParameterException e) {
+            assertEquals("Invalid Department Name: ", e.getMessage());
+        }
+    }
+    @Test
+    public void testDepartmentName()  {
         assertEquals(d.getDepartmentName(), "Sales");
     }
 
     @Test
-    public void testAddEmployee() throws NullParameterException, BadParameterException {
+    public void testAddEmployee() throws NullParameterException, BadParameterException   {
+        assertEquals(d.getNumInDepartment(), 0);
         d.addEmployee(e);
         assertEquals(d.getNumInDepartment(), 1);
+
     }
-
-
     @Test
     public void testRemoveEmployee() throws NullParameterException, BadParameterException {
         d.removeEmployee(6642);
         assertEquals(d.getNumInDepartment(),0);
+        d.removeEmployee(6642);
+        assertNotEquals(d.getNumInDepartment(),1);
+
     }
     @Test
-    public void testInDepartment() throws NullParameterException, BadParameterException {
+    public void testInDepartment() {
         assertEquals(false, d.isInDepartment(6642));
         assertEquals(false, d.isInDepartment(-1));
     }
@@ -64,6 +73,7 @@ public class DepartmentTest {
         }
         d.addEmployee(e);
     }
+
 
     @Rule
     public final ExpectedException nullException = ExpectedException.none();

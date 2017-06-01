@@ -44,7 +44,7 @@ public class Timecard {
     }
 
     /**+
-     * Get Weekly Hours by traversing all the working days
+     * Get Total Weekly Hours by traversing all the working days
      * @return number of hours worked in a week
      */
     public int getWeeklyHours() {
