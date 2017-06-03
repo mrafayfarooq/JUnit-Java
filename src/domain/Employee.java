@@ -122,7 +122,10 @@ public class Employee implements Comparable<Employee> {
         lastName = lName;
     }
 
-    // Get Employee ID
+    /**+
+     * Get Employee ID
+     * @return employee id
+     */
     public int getEmployeeId() {
         return employeeId;
     }
@@ -139,7 +142,10 @@ public class Employee implements Comparable<Employee> {
         employeeId = eId;
     }
 
-    // Get Hoursly Rate
+    /**+
+     * Get Hourly Rate
+     * @return hourly rate
+     */
     public double getHourlyRate() {
         return hourlyRate;
     }
@@ -156,8 +162,12 @@ public class Employee implements Comparable<Employee> {
         hourlyRate = hRate;
     }
 
-    // Get Time Card Entries
+    /**+
+     * Get Time Card Entries
+     * @return Timecard Object
+     */
     private Timecard getTimecard() {
+
         return timecard;
     }
 

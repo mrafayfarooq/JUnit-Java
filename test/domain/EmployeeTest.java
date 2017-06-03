@@ -14,7 +14,6 @@ import static org.junit.Assert.*;
  */
 public class EmployeeTest {
     private Employee e;
-    private SalesEmployee s;
 
     @Before
     public void setUp() {
@@ -27,13 +26,13 @@ public class EmployeeTest {
         }
     }
     @Rule
-    public final ExpectedException nullException = ExpectedException.none();
+    public final ExpectedException badException = ExpectedException.none();
 
     @Test
     public void testIfEmployeeExist() {
         assertEquals(0,e.compareTo(e));
         Employee  emptyEmployee = null;
-        nullException.expect(NullPointerException.class);
+        badException.expect(NullPointerException.class);
         e.compareTo(emptyEmployee);
     }
 
@@ -59,4 +58,50 @@ public class EmployeeTest {
         assertNotEquals("-1", e.getHourlyRate());
         assertEquals(37.87, e.getHourlyRate(),0.1);
     }
+
+    @Test
+    public void testBadName() throws NullParameterException, BadParameterException {
+        badException.expect(BadParameterException.class);
+        e = new Employee("", "", 1547, 37.87, new int[]{8, 8, 8, 8, 7});
+    }
+    @Test
+    public void testNullLastName() throws NullParameterException, BadParameterException {
+        badException.expect(NullParameterException.class);
+        e = new Employee(null, "Something", 1547, 37.87, new int[]{8, 8, 8, 8, 7});
+    }
+    @Test
+    public void testNullFirstName() throws NullParameterException, BadParameterException {
+        badException.expect(NullParameterException.class);
+        e = new Employee("Something", null, 1547, 37.87, new int[]{8, 8, 8, 8, 7});
+    }
+    @Test
+    public void testBadEmployeeID() throws NullParameterException, BadParameterException {
+        badException.expect(BadParameterException.class);
+        e = new Employee("Muhammad", "Rafay", -121, 37.87, new int[]{8, 8, 8, 8, 7});
+    }
+    @Test
+    public void testBadHourlyRate() throws NullParameterException, BadParameterException {
+        badException.expect(BadParameterException.class);
+        e = new Employee("Muhammad", "Rafay", 1111, 0, new int[]{8, 8, 8, 8, 7});
+    }
+    @Test
+    public void testSetTimeCard() throws NullParameterException, BadParameterException {
+        badException.expect(NullParameterException.class);
+        e = new Employee("Muhammad", "Rafay", 1111, 37.87, null);
+    }
+    @Test
+    public void testVeryLongFirstName() throws NullParameterException, BadParameterException {
+        badException.expect(BadParameterException.class);
+        e = new Employee("This is more than 20 character long.", "Rafay", 1111, 37.87, null);
+    }
+    @Test
+    public void testVeryLongLastName() throws NullParameterException, BadParameterException {
+        badException.expect(BadParameterException.class);
+        e = new Employee("Muhammad", "This is more than 20 character long.", 1111, 37.87, null);
+    }
+    @Test
+    public void testToString() {
+        assertNotNull(e.toString());
+    }
+
 }
